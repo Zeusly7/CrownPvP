@@ -1,11 +1,14 @@
 name: Build & Deploy CrownCore
+
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,23 +18,25 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
+          cache: 'maven'
 
       - name: Build with Maven
         run: mvn -U -B clean package -DskipTests
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: CrownCore-jar
-          path: crowncore/target/CrownCore-*.jar
+      # Petit debug utile pour vérifier le nom du JAR
+      - name: List built files
+        run: ls -lah crowncore/target || true
 
       - name: Deploy via SFTP (to /home/container/plugins)
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.SFTP_USER }}
-          server:   ${{ secrets.SFTP_HOST }}
-          port:     ${{ secrets.SFTP_PORT }}
+          server: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
           password: ${{ secrets.SFTP_PASS }}
-          local_path: 'crowncore/target/CrownCore-*.jar'
-          remote_path: '/home/container/plugins/'
           sftp_only: true
+          # ⬇️ CORRECTION ICI : minuscules et bon chemin
+          local_path: crowncore/target/crowncore-*.jar
+          # si le root SFTP est déjà /home/container, tu peux mettre juste /plugins/
+          remote_path: /home/container/plugins/
+          delete_remote_files: false
