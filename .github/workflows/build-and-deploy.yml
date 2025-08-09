@@ -1,0 +1,30 @@
+name: Build & Deploy CrownCore
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Build
+        run: mvn -U -q clean package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: CrownCore-jar
+          path: crowncore/target/CrownCore-*.jar
+      - name: Deploy via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ${{ secrets.SFTP_USER }}
+          server: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
+          ssh_password: ${{ secrets.SFTP_PASS }}
+          local_path: 'crowncore/target/CrownCore-*.jar'
+          remote_path: '/home/container/plugins/'
+          sftp_only: true

@@ -1,0 +1,13 @@
+name: CrownCore
+version: 0.1.1
+main: com.crownpvp.crowncore.CrownCorePlugin
+api-version: '1.21'
+load: STARTUP
+commands:
+  crown:
+    description: Commande principale CrownPvP
+    usage: /crown
+    permission: crowncore.use
+permissions:
+  crowncore.use:
+    default: true

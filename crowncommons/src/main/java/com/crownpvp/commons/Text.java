@@ -1,0 +1,1 @@
+package com.crownpvp.commons; public final class Text { public static String color(String s){return s;} }
