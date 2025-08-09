@@ -17,22 +17,16 @@
   </modules>
 
   <properties>
+    <!-- Java 21 nécessaire pour Paper 1.21.4 (class file version 65) -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     <paper.api.version>1.21.4-R0.1-SNAPSHOT</paper.api.version>
     <hikari.version>5.1.0</hikari.version>
     <mysql.version>8.4.0</mysql.version>
-    <sqlite.version>3.46.0.0</sqlite.version>
     <lombok.version>1.18.32</lombok.version>
   </properties>
-
-  <repositories>
-    <repository>
-      <id>papermc</id>
-      <url>https://repo.papermc.io/repository/maven-public/</url>
-    </repository>
-  </repositories>
 
   <dependencyManagement>
     <dependencies>
@@ -44,5 +38,21 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <!-- Repos nécessaires en CI pour résoudre paper-api -->
+  <repositories>
+    <repository>
+      <id>papermc</id>
+      <url>https://repo.papermc.io/repository/maven-public/</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+    <repository>
+      <id>sonatype-public</id>
+      <url>https://oss.sonatype.org/content/groups/public/</url>
+      <releases><enabled>true</enabled></releases>
+      <snapshots><enabled>true</enabled></snapshots>
+    </repository>
+  </repositories>
 
 </project>
