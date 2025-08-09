@@ -17,7 +17,7 @@
   </modules>
 
   <properties>
-    <!-- Java 21 nécessaire pour Paper 1.21.4 (class file version 65) -->
+    <!-- Paper 1.21.4 compile en Java 21 -->
     <maven.compiler.source>21</maven.compiler.source>
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,6 +25,7 @@
     <paper.api.version>1.21.4-R0.1-SNAPSHOT</paper.api.version>
     <hikari.version>5.1.0</hikari.version>
     <mysql.version>8.4.0</mysql.version>
+    <sqlite.version>3.45.3.0</sqlite.version>
     <lombok.version>1.18.32</lombok.version>
   </properties>
 
@@ -39,7 +40,6 @@
     </dependencies>
   </dependencyManagement>
 
-  <!-- Repos nécessaires en CI pour résoudre paper-api -->
   <repositories>
     <repository>
       <id>papermc</id>
@@ -54,5 +54,4 @@
       <snapshots><enabled>true</enabled></snapshots>
     </repository>
   </repositories>
-
 </project>
