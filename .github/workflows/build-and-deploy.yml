@@ -29,9 +29,9 @@ jobs:
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.SFTP_USER }}
-          server: ${{ secrets.SFTP_HOST }}
-          port: ${{ secrets.SFTP_PORT }}
-          ssh_password: ${{ secrets.SFTP_PASS }}
+          server:   ${{ secrets.SFTP_HOST }}
+          port:     ${{ secrets.SFTP_PORT }}
+          password: ${{ secrets.SFTP_PASS }}
           local_path: 'crowncore/target/CrownCore-*.jar'
           remote_path: '/home/container/plugins/'
           sftp_only: true
