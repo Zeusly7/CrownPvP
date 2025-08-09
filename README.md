@@ -7,4 +7,4 @@
 mvn -U -q clean package
 
 ## Déploiement
-Le workflow Github Actions déploie crowncore dans /home/container/plugins via SFTP.
+Le workflow GitHub Actions déploie crowncore dans /home/container/plugins via SFTP
